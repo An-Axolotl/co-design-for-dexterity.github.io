@@ -406,6 +406,25 @@
             line-height: 1.6;
         }
 
+        /* Video Container for Responsive YouTube Embed */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #35353b;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
@@ -564,12 +583,14 @@
     </div>
 
     <!-- Explainer Video Section -->
-    <div class="hero" style="margin-top: 60px; margin-bottom: 100px;">
-        <video id="explainer-video" controls loop playsinline>
-            <source src="explainer-video.mp4" type="video/mp4">
-            <track kind="captions" src="explainer-video.vtt" srclang="en" label="English" default>
-        </video>
-    </div>
+    <section class="section" style="padding-top: 60px; padding-bottom: 100px;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <video controls style="width: 100%; border-radius: 8px; border: 1px solid #35353b; box-shadow: 0 8px 40px rgba(0,0,0,0.5);">
+                <source src="explainer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
 
     <!-- Key Features -->
     <div class="section">
@@ -680,9 +701,6 @@
         </div>
     </div>
 
-        
-        </div>
-    </div>
     
     <div class="section">
     <h2>Design Analysis</h2>
@@ -706,7 +724,7 @@
         <ul style="margin-top: 20px; line-height: 2; color: #d8d8d8;">
             <li><strong>Cross-embodiment enables tractable scaling:</strong> Cross-embodiment evaluation provides a practical approach to assess designs for complex manipulation without sacrificing fine control for computational speed, making co-design optimization feasible for real-world deployment.</li>
             <li><strong>Realistic grammar-based design enables zero-shot transfer:</strong> Grounding design grammars in physical components allows for seamless sim-to-real transfer without additional fine-tuning, as the modular structure maintains consistent physical properties across domains.</li>
-            <li><strong>Task-specific optimization can outperform anthropomorphic design:</strong> Our results demonstrate that morphologies optimized for specific manipulation tasks can outperform traditional anthropomorphic hand designs in task-specific metrics.</li>
+            <li><strong>Task-specific optimization outperforms anthropomorphic design:</strong> Our results demonstrate that morphologies optimized for specific manipulation tasks consistently outperform traditional anthropomorphic hand designs in task-specific metrics, questioning assumptions about human-inspired design superiority.</li>
             <li><strong>Morphology dominates the design space:</strong> Among all design parameters, morphological choices have the largest impact on manipulation performance, suggesting that shape and structure optimization should be prioritized over other design considerations.</li>
         </ul>
     </div>
@@ -756,7 +774,7 @@
     <div class="section">
         <h2>Citation</h2>
         <div class="citation">
-@article{fay2025crosscodex,
+@article{fay2025crossembodied,
   title={Cross Embodied Co-Design for Dexterous Hands},
   author={Fay, Kehlani and Djapri, Darin and Zorin, Anya and Clinton, James and El Lahib, Ali and Su, Hao and Tolley, Michael T. and Yi, Sha and Wang, Xiaolong},
   journal={arXiv preprint},
@@ -768,17 +786,11 @@
 
     <!-- Footer -->
     <footer>
-        <p>This work was supported by NSF GRFP. For collaberations and questions: kfay ¯\_(ツ @)_/¯ ucsd.edu </p>
+        <p>This work was supported by NSF GRFP. Special thanks to [Acknowledgments].</p>
     </footer>
 
     <script>
-        // Set the explainer video to play at 1.25x speed
         document.addEventListener('DOMContentLoaded', function() {
-            const explainerVideo = document.getElementById('explainer-video');
-            if (explainerVideo) {
-                explainerVideo.playbackRate = 1.25;
-            }
-            
             // Make flipping video loop at 38 seconds
             const flippingVideo = document.getElementById('flipping-video');
             if (flippingVideo) {
@@ -787,6 +799,12 @@
                         flippingVideo.currentTime = 0;
                     }
                 });
+            }
+
+            // Set explainer video to 0.75x speed (75% speed)
+            const explainerVideo = document.querySelector('section.section video');
+            if (explainerVideo) {
+                explainerVideo.playbackRate = 0.75;
             }
         });
     </script>
